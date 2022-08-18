@@ -15,3 +15,13 @@ To install Packages, follow these steps:
 npm i wokcommands discord.js path mongoose
 
 ```
+### Creating `index.js` file
+```js
+// Importing Packages
+const Discord = require('discord.js')
+const WOK = require('wokcommands')
+const path = require('path')
+
+// Creating Client
+const { Intents } = require('discord.js')
+```
