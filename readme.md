@@ -23,5 +23,31 @@ const WOK = require('wokcommands')
 const path = require('path')
 
 // Creating Client
-const { Intents } = require('discord.js')
+const { Client, Intents } = Discord
+const client = new Client({
+    intents: [
+    Intents.FLAGS.GUILDS,
+    Intents.FLAGS.GUILD_MESSAGES,
+    Intents.FLAGS.GUILD_MESSAGE_REACTION
+  ],
+})
+
+// Importing Config
+client.config = require('./config.js')
+
+//Creating Wokcommands instance
+client.on('ready', () => {
+const dbOptions = {
+  keepAlive: true,
+}
+new WOK(client,{
+  commandsDir: path.join(__dirname, 'commands')
+  testServers: client.config.TESTSERVERS,
+  botOwners: client.config.BOTOWNERS,
+  mongoUri: client.config.DB_URI,
+})
+
+//Logging in the bot
+client.login(client.config.BOT_TOKEN)
+})
 ```
